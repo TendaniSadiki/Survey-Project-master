@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Survey for people's lifestyle preferences</title>
+</head>
+<body>
+    <!--about section design-->
+    <section class="about">
+        <div class="wrapper">
+            <div class="title">
+                Take Our Survey
+            </div>
+            <div class="form">
+                <h1>Personal Details</h1>
+                <div class="input_field">
+                    <label>Surname</label>
+                    <input type="text" name="surname" class="input" placeholder="ENTER YOUR SURNAME">
+                </div>
+                <div class="input_field">
+                    <label>First Names</label>
+                    <input type="text" name="firstNames" class="input" placeholder="ENTER YOUR FIRST NAMES">
+                </div>
+                <div class="input_field">
+                    <label>Contact Number</label>
+                    <input type="text" name="contactNumber" class="input" placeholder="ENTER YOUR CONTACT">
+                </div>
+                <div class="input_field">
+                    <label>Date</label>
+                    <input type="datetime-local" name="date" class="input" placeholder="SELECT DATETIME">
+                </div>
+                <div class="input_field">
+                    <label>Age</label>
+                    <input type="number" name="age" class="input" placeholder="ENTER YOUR AGE">
+                </div>
+                <br>
+                <h1>What is your favorite food? (You can choose more than 1 answer)</h1>
+                <div class="input_field">
+                    <input type="checkbox" name="food" class="check" value="Pizza">
+                    <label>Pizza</label>
+                </div>
+                <div class="input_field">
+                    <input type="checkbox" name="food" class="check" value="Pasta">
+                    <label>Pasta</label>
+                </div>
+                <div class="input_field">
+                    <input type="checkbox" name="food" class="check" value="Pap and Wors">
+                    <label>Pap and Wors</label>
+                </div>
+                <div class="input_field">
+                    <input type="checkbox" name="food" class="check" value="Chicken stir fry">
+                    <label>Chicken stir fry</label>
+                </div>
+                <div class="input_field">
+                    <input type="checkbox" name="food" class="check" value="Beef stir fry">
+                    <label>Beef stir fry</label>
+                </div>
+                <div class="input_field">
+                    <input type="checkbox" name="food" class="check" value="Other">
+                    <label>Other</label>
+                </div>
+                <br>
+                <h1>On a scale of 1 to 5, indicate your agreement level:</h1>
+                <label for="eatOut">I like to eat out:</label>
+                <div class="ratingScale">
+                    <span>Strongly Disagree</span>
+                    <label><input type="radio" name="eatOut" value="5">5 (Strongly Disagree)</label>
+                    <label><input type="radio" name="eatOut" value="4">4 (Disagree)</label>
+                    <label><input type="radio" name="eatOut" value="3">3 (Neutral)</label>
+                    <label><input type="radio" name="eatOut" value="2">2 (Agree)</label>
+                    <label><input type="radio" name="eatOut" value="1">1 (Strongly Agree)</label>
+                    <span>Strongly Agree</span>
+                </div>
+
+                <label for="watchMovies">I like to watch movies:</label>
+                <div class="ratingScale">
+                    <span>Strongly Disagree</span>
+                    <label><input type="radio" name="watchMovies" value="5">5 (Strongly Disagree)</label>
+                    <label><input type="radio" name="watchMovies" value="4">4 (Disagree)</label>
+                    <label><input type="radio" name="watchMovies" value="3">3 (Neutral)</label>
+                    <label><input type="radio" name="watchMovies" value="2">2 (Agree)</label>
+                    <label><input type="radio" name="watchMovies" value="1">1 (Strongly Agree)</label>
+                    <span>Strongly Agree</span>
+                </div>
+
+                <label for="watchTV">I like to watch TV:</label>
+                <div class="ratingScale">
+                    <span>Strongly Disagree</span>
+                    <label><input type="radio" name="watchTV" value="5">5 (Strongly Disagree)</label>
+                    <label><input type="radio" name="watchTV" value="4">4 (Disagree)</label>
+                    <label><input type="radio" name="watchTV" value="3">3 (Neutral)</label>
+                    <label><input type="radio" name="watchTV" value="2">2 (Agree)</label>
+                    <label><input type="radio" name="watchTV" value="1">1 (Strongly Agree)</label>
+                    <span>Strongly Agree</span>
+                </div>
+
+                <label for="listenRadio">I like to listen to the radio:</label>
+                <div class="ratingScale">
+                    <span>Strongly Disagree</span>
+                    <label><input type="radio" name="listenRadio" value="5">5 (Strongly Disagree)</label>
+                    <label><input type="radio" name="listenRadio" value="4">4 (Disagree)</label>
+                    <label><input type="radio" name="listenRadio" value="3">3 (Neutral)</label>
+                    <label><input type="radio" name="listenRadio" value="2">2 (Agree)</label>
+                    <label><input type="radio" name="listenRadio" value="1">1 (Strongly Agree)</label>
+                    <span>Strongly Agree</span>
+                </div>
+                <br>
+                <button class="btn" onclick="submitForm()">Submit</button>
+            </div>
+        </div>
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  
+    <script src="./js/script.js">
+     
+       
+    </script>
+</body>
+</html>
+

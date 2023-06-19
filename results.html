@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Results of survey for people's lifestyle preferences</title>
+</head>
+<body>
+  <!--about section design-->
+  <section class="about">
+    <div class="about-content1">
+      <div class="scroll-div">
+        <div class="scroll-object">
+          <p id="totalSurveys">Total number of surveys: #surveys</p>
+          <p id="averageAge">Average age: #average age</p>
+          <p id="oldestPerson">Oldest person who participated in survey: #</p>
+          <p id="youngestPerson">Youngest person who participated in survey: #</p>
+          <p id="pizzaPercentage">Percentage of people who like Pizza: #</p>
+          <p id="pastaPercentage">Percentage of people who like Pasta: #</p>
+          <p id="papWorsPercentage">Percentage of people who like Pap and Wors: #</p>
+          <p id="eatOutAverage">People like to eat out: #</p>
+          <p id="watchMoviesAverage">People like to watch movies: #</p>
+          <p id="watchTVAverage">People like to watch TV: #</p>
+          <p id="listenRadioAverage">People like to listen to the radio: #</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>  
+  <script >
+    // Initialize Firebase
+var config = {
+  apiKey: "AIzaSyB3rk1r3fn1ceY24SWrVXAQ8Ow8T8MDUhU",
+  authDomain: "survey-5685f.firebaseapp.com",
+  projectId: "survey-5685f",
+  storageBucket: "survey-5685f.appspot.com",
+  messagingSenderId: "670927044882",
+  appId: "1:670927044882:web:2fce540df79337817ef3cb"
+};
+firebase.initializeApp(config);
+
+// Reference to the Firebase database
+var database = firebase.database();
+
+// Function to calculate survey statistics
+function calculateStatistics() {
+  // Calculate total number of surveys
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalSurveys = snapshot.numChildren();
+    document.getElementById('totalSurveys').innerText = 'Total number of surveys: ' + totalSurveys;
+  });
+
+  // Calculate average age
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalAge = 0;
+    var totalPeople = snapshot.numChildren();
+    snapshot.forEach(function(childSnapshot) {
+      var age = childSnapshot.val().age;
+      totalAge += age;
+    });
+    var averageAge = totalAge / totalPeople;
+    document.getElementById('averageAge').innerText = 'Average age: ' + averageAge.toFixed(1);
+  });
+
+  // Find oldest person
+  database.ref('surveys').orderByChild('age').limitToLast(1).once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var oldestPerson = childSnapshot.val().name;
+      document.getElementById('oldestPerson').innerText = 'Oldest person who participated in survey: ' + oldestPerson;
+    });
+  });
+
+  // Find youngest person
+  database.ref('surveys').orderByChild('age').limitToFirst(1).once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var youngestPerson = childSnapshot.val().name;
+      document.getElementById('youngestPerson').innerText = 'Youngest person who participated in survey: ' + youngestPerson;
+    });
+  });
+
+  // Calculate percentage of people who like Pizza
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var pizzaCount = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var likesPizza = childSnapshot.val().likesPizza;
+      if (likesPizza) {
+        pizzaCount++;
+      }
+    });
+    var pizzaPercentage = (pizzaCount / totalPeople) * 100;
+    document.getElementById('pizzaPercentage').innerText = 'Percentage of people who like Pizza: ' + pizzaPercentage.toFixed(1) + '%';
+  });
+
+  // Calculate percentage of people who like Pasta
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var pastaCount = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var likesPasta = childSnapshot.val().likesPasta;
+      if (likesPasta) {
+        pastaCount++;
+      }
+    });
+    var pastaPercentage = (pastaCount / totalPeople) * 100;
+    document.getElementById('pastaPercentage').innerText = 'Percentage of people who like Pasta: ' + pastaPercentage.toFixed(1) + '%';
+  });
+
+  // Calculate percentage of people who like Pap and Wors
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var papWorsCount = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var likesPapWors = childSnapshot.val().likesPapWors;
+      if (likesPapWors) {
+        papWorsCount++;
+      }
+    });
+    var papWorsPercentage = (papWorsCount / totalPeople) * 100;
+    document.getElementById('papWorsPercentage').innerText = 'Percentage of people who like Pap and Wors: ' + papWorsPercentage.toFixed(1) + '%';
+  });
+
+  // Calculate average rating for "Eat out"
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var totalEatOutRating = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var eatOutRating = childSnapshot.val().eatOutRating;
+      totalEatOutRating += eatOutRating;
+    });
+    var eatOutAverage = totalEatOutRating / totalPeople;
+    document.getElementById('eatOutAverage').innerText = 'People like to eat out: ' + eatOutAverage.toFixed(1);
+  });
+
+  // Calculate average rating for "Watch movies"
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var totalMoviesRating = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var moviesRating = childSnapshot.val().moviesRating;
+      totalMoviesRating += moviesRating;
+    });
+    var moviesAverage = totalMoviesRating / totalPeople;
+    document.getElementById('watchMoviesAverage').innerText = 'People like to watch movies: ' + moviesAverage.toFixed(1);
+  });
+
+  // Calculate average rating for "Watch TV"
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var totalTVRating = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var tvRating = childSnapshot.val().tvRating;
+      totalTVRating += tvRating;
+    });
+    var tvAverage = totalTVRating / totalPeople;
+    document.getElementById('watchTVAverage').innerText = 'People like to watch TV: ' + tvAverage.toFixed(1);
+  });
+
+  // Calculate average rating for "Listen to the radio"
+  database.ref('surveys').once('value').then(function(snapshot) {
+    var totalPeople = snapshot.numChildren();
+    var totalRadioRating = 0;
+    snapshot.forEach(function(childSnapshot) {
+      var radioRating = childSnapshot.val().radioRating;
+      totalRadioRating += radioRating;
+    });
+    var radioAverage = totalRadioRating / totalPeople;
+    document.getElementById('listenRadioAverage').innerText = 'People like to listen to the radio: ' + radioAverage.toFixed(1);
+  });
+}
+
+// Call the calculateStatistics function when the page is loaded
+window.addEventListener('load', calculateStatistics);
+
+  </script>
+</body>
+</html>

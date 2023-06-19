@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Survey for people's lifestyle preferences</title>
+</head>
+<body>
+    <!--about section design-->
+    <section class="about">
+        <div class="about-content">
+            <button id="fillSurveyBtn" class="btn">Fill out survey</button>
+            <button id="viewResultsBtn" class="btn">View survey results</button>
+        </div>
+    </section>
+    <script >
+        document.getElementById("fillSurveyBtn").addEventListener("click", function() {
+            // Redirect to the survey page
+            window.location.href = "survey.html";
+        });
+        
+        document.getElementById("viewResultsBtn").addEventListener("click", function() {
+            // Redirect to the results page
+            window.location.href = "results.html";
+        });
+        
+    </script>
+    
+</body>
+</html>
